@@ -6,6 +6,11 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Scanner;
 
+import camada.dominio.Contrato;
+import camada.dominio.Parcelamento;
+import camada.servico.ServicoContrato;
+import camada.servico.ServicoPaypal;
+
 public class Programa {
 
 	public static void main(String[] args) throws ParseException {
@@ -21,14 +26,21 @@ public class Programa {
 		sc.nextLine();
 		Date data = sdf.parse(sc.nextLine());
 		System.out.print("Valor do contrato: ");
-		Double valor = sc.nextDouble();
-		System.out.print("Informe o número de parcelas: ");
-		Integer parcelas = sc.nextInt();
+		Double valorTotal = sc.nextDouble();
 		
-		//Área para instanciar Objetos e Executar Métodos.
+		Contrato contrato = new Contrato(numero, data, valorTotal);
+		
+		System.out.print("Informe o número de parcelas: ");
+		Integer n = sc.nextInt();
+		
+		ServicoContrato servicoContrato = new ServicoContrato(new ServicoPaypal());
+		
+		servicoContrato.processoContrato(contrato, n);
 		
 		System.out.println("CALENDÁRIO DE PAGAMENTOS E VALORES");
-		
-
+		for (Parcelamento x: contrato.getParcelas()) {
+			System.out.println(x);
+		}
+		sc.close();
 	}
 }

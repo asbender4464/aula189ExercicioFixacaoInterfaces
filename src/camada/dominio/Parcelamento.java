@@ -1,9 +1,12 @@
 package camada.dominio;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Parcelamento {
 
+	private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+	
 	//Atributos.
 	private Date dataDoDebito;
 	private Double montante;
@@ -32,5 +35,10 @@ public class Parcelamento {
 
 	public void setMontante(Double montante) {
 		this.montante = montante;
+	}
+	
+	@Override
+	public String toString() {
+		return sdf.format(dataDoDebito) + " - " + String.format("%.2f", montante);
 	}
 }

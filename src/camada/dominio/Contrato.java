@@ -1,6 +1,8 @@
 package camada.dominio;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Contrato {
 
@@ -8,6 +10,8 @@ public class Contrato {
 	private Integer numero;
 	private Date data;
 	private Double valorTotal;
+	
+	private List<Parcelamento> parcelas = new ArrayList<>();
 	
 	//Construtores
 	public Contrato() {
@@ -44,4 +48,15 @@ public class Contrato {
 		this.valorTotal = valorTotal;
 	}
 	
+	public List<Parcelamento> getParcelas(){
+		return parcelas;
+	}
+	
+	public void addParcelamento(Parcelamento parcelamento) {
+		parcelas.add(parcelamento);
+	}
+	
+	public void removeParcelamento(Parcelamento parcelamento) {
+		parcelas.remove(parcelamento);
+	}
 }
